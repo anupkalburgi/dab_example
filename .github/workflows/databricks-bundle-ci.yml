@@ -29,22 +29,29 @@ jobs:
 
     - name: Configure Databricks CLI
       run: |
-        echo "${{ secrets.DATABRICKS_HOST }}" | databricks configure --token
+        # Databricks CLI will automatically use these environment variables
+        echo "Databricks CLI configured via environment variables"
+
+    - name: Deploy Bundle
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-
-    - name: Deploy Bundle
       run: |
         databricks bundle deploy -t ${{ env.BUNDLE_TARGET }}
 
     - name: Run Integration Test Job
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       run: |
         # This will automatically wait for the job to complete and exit with appropriate status
         databricks bundle run -t ${{ env.BUNDLE_TARGET }} int_test_job
 
     - name: Cleanup on Failure
       if: failure()
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       run: |
         echo "Cleaning up failed deployment..."
         databricks bundle destroy -t ${{ env.BUNDLE_TARGET }} --auto-approve || true 
