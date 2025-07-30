@@ -1,0 +1,58 @@
+resources:
+  jobs:
+    int_test_job:
+      name: int_test_job
+
+      # This job is for integration testing, so no periodic trigger
+      # It will be run manually or via CI/CD
+
+      tasks:
+        - task_key: produce_data
+          environment_key: default
+          notebook_task:
+            notebook_path: ../src/tests/setup.ipynb
+            base_parameters:
+                catalog_name: "${var.target_catalog}"
+                schema_name: "${var.target_schema}"
+                date: "${var.current_date}"
+
+        - task_key: run_enrichment
+          depends_on:
+            - task_key: produce_data
+          environment_key: default
+          notebook_task:
+            notebook_path: ../src/enrich_ecb_data.ipynb
+            base_parameters:
+                catalog_name: "${var.target_catalog}"
+                schema_name: "${var.target_schema}"
+                date: "${var.current_date}"
+
+        - task_key: validation
+          depends_on:
+            - task_key: run_enrichment
+          environment_key: default
+          notebook_task:
+            notebook_path: ../src/tests/validate.ipynb
+            base_parameters:
+                catalog_name: "${var.target_catalog}"
+                schema_name: "${var.target_schema}"
+                date: "${var.current_date}"
+
+        - task_key: cleanup
+          depends_on:
+            - task_key: validation
+          environment_key: default
+          notebook_task:
+            notebook_path: ../src/tests/clean_up.ipynb
+            base_parameters:
+                catalog_name: "${var.target_catalog}"
+                schema_name: "${var.target_schema}"
+                date: "${var.current_date}"
+
+      
+      environments:
+        - environment_key: default
+          spec:
+            client: '1'
+            dependencies:
+              - requests

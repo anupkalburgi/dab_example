@@ -1,0 +1,359 @@
+{
+  "tables": {
+    "fx_rates_ecb_eur_base": {
+      "number_of_rows": 5000,
+      "partitions": 4,
+      "columns": [
+        {
+          "name": "KEY",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "FREQ",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "CURRENCY",
+          "type": "string",
+          "primary": false,
+          "options": {
+            "template": "www"
+          },
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "CURRENCY_DENOM",
+          "type": "string",
+          "primary": false,
+          "options": {
+            "values": ["USD", "EUR", "GBP", "JPY", "CAD", "AUD", "CHF"]
+          },
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "EXR_TYPE",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "EXR_SUFFIX",
+          "type": "string",
+          "primary": false,
+          "options": {
+            "template": "Jr|Sr|II|III|IV"
+          },
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "TIME_PERIOD",
+          "type": "date",
+          "primary": false,
+          "options": {
+            "expr": "current_date()"
+          },
+          "nullable": false,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "OBS_VALUE",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "OBS_STATUS",
+          "type": "string",
+          "primary": false,
+          "options": {
+            "template": "Active|Inactive|Pending|Closed"
+          },
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "OBS_CONF",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "OBS_PRE_BREAK",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "OBS_COM",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "TIME_FORMAT",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "BREAKS",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "COLLECTION",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "COMPILING_ORG",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "DISS_ORG",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "DOM_SER_IDS",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "PUBL_ECB",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "PUBL_MU",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "PUBL_PUBLIC",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "UNIT_INDEX_BASE",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "COMPILATION",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "COVERAGE",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "DECIMALS",
+          "type": "long",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "NAT_TITLE",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "SOURCE_AGENCY",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "SOURCE_PUB",
+          "type": "double",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "TITLE",
+          "type": "string",
+          "primary": false,
+          "options": {
+            "template": "Mr|Ms|Mrs|Dr|Prof"
+          },
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "TITLE_COMPL",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "UNIT",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "UNIT_MULT",
+          "type": "long",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        },
+        {
+          "name": "ingest_date",
+          "type": "string",
+          "primary": false,
+          "options": {},
+          "nullable": true,
+          "omit": false,
+          "baseColumn": "id",
+          "baseColumnType": "auto"
+        }
+      ]
+    }
+  },
+  "output_destination": {
+    "catalog": "anup_kalburgi",
+    "schema_": "datagen",
+    "output_format": "delta"
+  },
+  "generator_options": {},
+  "intended_for_databricks": null
+}

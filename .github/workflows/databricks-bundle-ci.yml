@@ -1,0 +1,50 @@
+name: Databricks Bundle CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  BUNDLE_TARGET: int_test
+
+jobs:
+  deploy-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Databricks CLI
+      run: |
+        pip install databricks-cli
+
+    - name: Configure Databricks CLI
+      run: |
+        echo "${{ secrets.DATABRICKS_HOST }}" | databricks configure --token
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    - name: Deploy Bundle
+      run: |
+        databricks bundle deploy -t ${{ env.BUNDLE_TARGET }}
+
+    - name: Run Integration Test Job
+      run: |
+        # This will automatically wait for the job to complete and exit with appropriate status
+        databricks bundle run -t ${{ env.BUNDLE_TARGET }} int_test_job
+
+    - name: Cleanup on Failure
+      if: failure()
+      run: |
+        echo "Cleaning up failed deployment..."
+        databricks bundle destroy -t ${{ env.BUNDLE_TARGET }} --auto-approve || true 
