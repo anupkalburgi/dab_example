@@ -2,10 +2,17 @@
 # See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
 bundle:
   name: ecb_forex_data
-  uuid: d9e7d7a5-ef30-4d7b-8d97-973fdd703eab
+
+variables:
+  target_catalog:
+    description: "Target catalog for the bundle"
+  target_schema:
+    description: "Target schema for the bundle"
+  current_date:
+    description: "Current date for processing (YYYY-MM-DD format)"
 
 include:
-  - resources/*.yml
+  - resources/int_test.job.yml
 
 targets:
   dev:
@@ -17,6 +24,22 @@ targets:
     default: true
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
+    variables:
+      target_catalog: "anup_kalburgi"
+      target_schema: "dab_dev"
+      current_date: "2025-01-27"
+
+
+  int_test:
+    mode: development
+    presets:
+      name_prefix: "[Int Test]_${workspace.current_user.short_name}"
+    workspace:
+      host: https://adb-984752964297111.11.azuredatabricks.net
+    variables:
+      target_catalog: "anup_kalburgi"
+      target_schema: "int_test"
+      current_date: "2025-01-27"
 
   prod:
     mode: production
@@ -24,6 +47,11 @@ targets:
       host: https://adb-984752964297111.11.azuredatabricks.net
       # We explicitly deploy to /Workspace/Users/anup.kalburgi@databricks.com to make sure we only have a single copy.
       root_path: /Workspace/Users/anup.kalburgi@databricks.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      target_catalog: "anup_kalburgi"
+      target_schema: "dab_prod"
+      current_date: "2025-01-27"
     permissions:
       - user_name: anup.kalburgi@databricks.com
         level: CAN_MANAGE
+
