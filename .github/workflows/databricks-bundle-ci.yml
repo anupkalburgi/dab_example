@@ -12,7 +12,7 @@ env:
 jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
-    group: databricks-field-eng-protected-runner-group
+      group: databricks-field-eng-protected-runner-group 
     timeout-minutes: 45
     
     steps:
